@@ -2,16 +2,8 @@ package com.simmya.mapper;
 
 import com.simmya.pojo.Orders;
 
-public interface OrdersMapper {
-    int deleteByPrimaryKey(String id);
+import tk.mybatis.mapper.common.Mapper;
 
-    int insert(Orders record);
-
-    int insertSelective(Orders record);
-
-    Orders selectByPrimaryKey(String id);
-
-    int updateByPrimaryKeySelective(Orders record);
-
-    int updateByPrimaryKey(Orders record);
+public interface OrdersMapper extends Mapper<Orders> {
+   
 }

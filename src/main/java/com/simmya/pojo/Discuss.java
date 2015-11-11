@@ -2,7 +2,12 @@ package com.simmya.pojo;
 
 import java.util.Date;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 public class Discuss {
+	@Id
+	@GeneratedValue(generator = "UUID")
     private String id;
 
     private String infoId;

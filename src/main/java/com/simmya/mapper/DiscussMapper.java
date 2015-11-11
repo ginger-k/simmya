@@ -2,16 +2,8 @@ package com.simmya.mapper;
 
 import com.simmya.pojo.Discuss;
 
-public interface DiscussMapper {
-    int deleteByPrimaryKey(String id);
+import tk.mybatis.mapper.common.Mapper;
 
-    int insert(Discuss record);
-
-    int insertSelective(Discuss record);
-
-    Discuss selectByPrimaryKey(String id);
-
-    int updateByPrimaryKeySelective(Discuss record);
-
-    int updateByPrimaryKey(Discuss record);
+public interface DiscussMapper extends Mapper<Discuss> {
+    
 }

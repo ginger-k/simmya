@@ -5,9 +5,7 @@ import java.util.Date;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
-@Table(name = "user")
 public class User {
 	@Id
 	@GeneratedValue(generator = "UUID")

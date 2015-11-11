@@ -1,6 +1,11 @@
 package com.simmya.pojo;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 public class Info {
+	@Id
+	@GeneratedValue(generator = "UUID")
     private String id;
 
     private String name;

@@ -3,7 +3,12 @@ package com.simmya.pojo;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 public class Orders {
+	@Id
+	@GeneratedValue(generator = "UUID")
     private String id;
 
     private String userId;

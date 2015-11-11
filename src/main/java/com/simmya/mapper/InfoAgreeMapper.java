@@ -2,16 +2,8 @@ package com.simmya.mapper;
 
 import com.simmya.pojo.InfoAgree;
 
-public interface InfoAgreeMapper {
-    int deleteByPrimaryKey(String id);
+import tk.mybatis.mapper.common.Mapper;
 
-    int insert(InfoAgree record);
+public interface InfoAgreeMapper extends Mapper<InfoAgree> {
 
-    int insertSelective(InfoAgree record);
-
-    InfoAgree selectByPrimaryKey(String id);
-
-    int updateByPrimaryKeySelective(InfoAgree record);
-
-    int updateByPrimaryKey(InfoAgree record);
 }

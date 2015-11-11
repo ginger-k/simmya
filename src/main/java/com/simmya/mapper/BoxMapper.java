@@ -2,16 +2,8 @@ package com.simmya.mapper;
 
 import com.simmya.pojo.Box;
 
-public interface BoxMapper {
-    int deleteByPrimaryKey(String id);
+import tk.mybatis.mapper.common.Mapper;
 
-    int insert(Box record);
-
-    int insertSelective(Box record);
-
-    Box selectByPrimaryKey(String id);
-
-    int updateByPrimaryKeySelective(Box record);
-
-    int updateByPrimaryKey(Box record);
+public interface BoxMapper extends Mapper<Box> {
+    
 }

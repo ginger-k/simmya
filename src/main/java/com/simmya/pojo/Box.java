@@ -2,7 +2,12 @@ package com.simmya.pojo;
 
 import java.math.BigDecimal;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 public class Box {
+	@Id
+	@GeneratedValue(generator = "UUID")
     private String id;
 
     private String name;
