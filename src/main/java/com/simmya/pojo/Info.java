@@ -20,8 +20,6 @@ public class Info {
 
     private Integer agreeCount;
 
-    private String discussId;
-
     private String imageAddress;
 
     private String source;
@@ -84,14 +82,6 @@ public class Info {
 
     public void setAgreeCount(Integer agreeCount) {
         this.agreeCount = agreeCount;
-    }
-
-    public String getDiscussId() {
-        return discussId;
-    }
-
-    public void setDiscussId(String discussId) {
-        this.discussId = discussId == null ? null : discussId.trim();
     }
 
     public String getImageAddress() {
