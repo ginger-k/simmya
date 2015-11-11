@@ -1,9 +1,15 @@
 package com.simmya.mapper;
 
+import java.util.List;
+
 import com.simmya.pojo.Info;
 
 public interface InfoMapper {
-    int deleteByPrimaryKey(String id);
+	
+
+	List<Info> getTopInfos(int limit);
+	
+	int deleteByPrimaryKey(String id);
 
     int insert(Info record);
 
