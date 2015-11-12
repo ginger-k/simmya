@@ -1,32 +1,56 @@
 package com.simmya.controller;
 
+import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.simmya.pojo.Info;
+import com.simmya.constant.ReturnMap;
+import com.simmya.pojo.User;
 import com.simmya.service.impl.InfoService;
+import com.simmya.service.impl.UserService;
 
 @Controller
 public class InfoController {	
 	
-	private static final Logger log = Logger.getLogger(InfoController.class);
 	
 	@Autowired
 	private InfoService infoService;
+	@Autowired
+	private UserService userService;
 	
-	@RequestMapping(value= "/info/list", method = RequestMethod.GET)
+	@RequestMapping(value= "/infos/list", method = RequestMethod.GET)
 	@ResponseBody
-	public List<Info> getTop10InfoOfClickcount(@RequestParam(value = "limit", required = true)String limit) {
-		//如果数据好几万，查出来程序中排序，跟order by查询那个快?
-		List<Info> list = infoService.selectAll();
-		return null;
+	public List<Map<String, Object>> getTop10InfoOfClickcount(@RequestParam(value = "limit", required = true)String limit) throws SQLException {
+		return infoService.getTop10(limit);
+	}
+	
+	@RequestMapping(value= "/infos/id", method = RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> getDetailById(@RequestParam(value = "infoid", required = true)String infoid) throws SQLException {
+		return infoService.getDetailById(infoid);
+	}
+	
+	@RequestMapping(value= "/infos/agree", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> doAgree(@RequestHeader(value = "token",required = false)String token,@RequestParam(value = "infoid", required = true)String infoid) throws SQLException {
+		if (StringUtils.isBlank(token)) {
+			return ReturnMap.BLANK;
+		}
+		User loginUser = userService.checkLogin(token);
+		if (loginUser == null) {
+			return ReturnMap.FAULT;
+		}
+		infoService.doAgree(loginUser.getId(), infoid);
+		return ReturnMap.SUCCESS;
 	}
 
 }

@@ -1,5 +1,8 @@
 package com.simmya.controller;
 
+import java.sql.SQLException;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.simmya.pojo.User;
 import com.simmya.service.impl.UserService;
+import com.simmya.util.DbUtil;
 
 
 @Controller
@@ -31,4 +35,14 @@ public class DemoController {
 		mv.addObject("user", user);
 		return mv;
 	}
+	
+	@RequestMapping(value= "/demo3", method = RequestMethod.GET)
+	public ModelAndView getUser3(@RequestParam(value = "id", required = true)String id) throws SQLException {
+		String sql = "select * from user where id = ?";
+		Map<String, Object> map = DbUtil.getMap(sql, id);
+		ModelAndView mv = new ModelAndView("jsp/demo");
+		mv.addObject("user", map);
+		return mv;
+	}
+	
 }

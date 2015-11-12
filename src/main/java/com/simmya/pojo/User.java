@@ -26,8 +26,10 @@ public class User {
     private String profession;
 
     private String veriCode;
+    
+    private String token;
 
-    private BigDecimal balance;
+	private BigDecimal balance;
 
     private Date expiredTime;
 
@@ -104,6 +106,14 @@ public class User {
     public void setVeriCode(String veriCode) {
         this.veriCode = veriCode == null ? null : veriCode.trim();
     }
+    
+    public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token == null ? null : token.trim();;
+	}
 
     public BigDecimal getBalance() {
         return balance;
