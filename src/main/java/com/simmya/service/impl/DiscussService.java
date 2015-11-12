@@ -5,22 +5,14 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.simmya.mapper.DiscussMapper;
-import com.simmya.mapper.InfoAgreeMapper;
 import com.simmya.pojo.Discuss;
 import com.simmya.service.BaseService;
 import com.simmya.util.DbUtil;
 
 @Service
 public class DiscussService extends BaseService<Discuss>{
-	
-	@Autowired
-	private InfoAgreeMapper infoAgreeMapper;
-	@Autowired
-	private DiscussMapper discussMapper;
 	
 	
 	public List<Map<String, Object>> listDiscussByInfoid(String infoid) throws SQLException {

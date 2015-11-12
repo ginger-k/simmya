@@ -67,5 +67,30 @@ public class InfoController {
 		}
 		return infoService.doDiscuss(loginUser.getId(), infoid, content);
 	}
+	
+	@RequestMapping(value= "/infos/collect", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> collectInfo(@RequestHeader(value = "token",required = false)String token,@RequestParam(value = "infoid", required = true)String infoid) {
+		if (StringUtils.isBlank(token)) {
+			return ReturnMap.BLANK;
+		}
+		User loginUser = userService.checkLogin(token);
+		if (loginUser == null) {
+			return ReturnMap.FAULT;
+		}
+		return infoService.collectInfo(loginUser.getId(), infoid);
+	}
 
+	@RequestMapping(value= "/infos/share", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> shareInfo(@RequestHeader(value = "token",required = false)String token,@RequestParam(value = "infoid", required = true)String infoid) {
+		if (StringUtils.isBlank(token)) {
+			return ReturnMap.BLANK;
+		}
+		User loginUser = userService.checkLogin(token);
+		if (loginUser == null) {
+			return ReturnMap.FAULT;
+		}
+		return infoService.shareInfo(loginUser.getId(), infoid);
+	}
 }

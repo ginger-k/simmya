@@ -12,9 +12,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.simmya.mapper.DiscussMapper;
 import com.simmya.mapper.InfoAgreeMapper;
+import com.simmya.mapper.InfoCollectionMapper;
+import com.simmya.mapper.UserShareRefMapper;
 import com.simmya.pojo.Discuss;
 import com.simmya.pojo.Info;
 import com.simmya.pojo.InfoAgree;
+import com.simmya.pojo.InfoCollection;
+import com.simmya.pojo.UserShareRef;
 import com.simmya.service.BaseService;
 import com.simmya.util.DbUtil;
 
@@ -25,6 +29,10 @@ public class InfoService extends BaseService<Info>{
 	private InfoAgreeMapper infoAgreeMapper;
 	@Autowired
 	private DiscussMapper discussMapper;
+	@Autowired
+	private InfoCollectionMapper infoCollectionMapper;
+	@Autowired
+	private UserShareRefMapper shareMapper;
 	
 	public List<Map<String, Object>> getTop10(String limit) throws SQLException {
 		String sql = "SELECT ID id,NAME NAME,TITLE TITLE,DETAIL detail,COLLECT_COUNT collectCount,"
@@ -99,6 +107,58 @@ public class InfoService extends BaseService<Info>{
 			super.updateSelective(info);
 			map.put("code", "sucess");
 			map.put("desc", "成功");
+		}
+		return map;
+	}
+
+	/*
+	 * 检查该用户有没有收藏过该咨询
+	 * info_collection表添加记录
+	 * info更新collect_count
+	 */
+	@Transactional
+	public Map<String, Object> collectInfo(String userid, String infoid) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		InfoCollection infoCollection = new InfoCollection();
+		infoCollection.setUserId(userid);
+		infoCollection.setInfoId(infoid);
+		List<InfoCollection> list = infoCollectionMapper.select(infoCollection);
+		if (list != null && list.size() > 0) {
+			map.put("code", "error");
+			map.put("desc", "你已收藏");
+		} else {
+			infoCollectionMapper.insert(infoCollection);
+			Info info = super.selectByPrimaryKey(infoid);
+			Integer collectCount = info.getCollectCount();
+			info.setCollectCount(collectCount + 1); 
+			super.updateSelective(info);
+			map.put("code", "sucess");
+			map.put("desc", "成功");
+		}
+		return map;
+	}
+
+	
+	/*
+	 * 检查该用户有没有分享该咨询
+	 * info_collection表添加记录
+	 * info更新collect_count
+	 */
+	public Map<String, Object> shareInfo(String userId, String infoId) {
+		UserShareRef share = new UserShareRef();
+		share.setUserId(userId);
+		share.setInfoId(infoId);
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<UserShareRef> list = shareMapper.select(share);
+		if (list != null && list.size() > 0) {
+			map.put("code", "error");
+		} else {
+			shareMapper.insert(share);
+			Info info = super.selectByPrimaryKey(infoId);
+			Integer count = info.getShareCount();
+			info.setShareCount(count + 1);
+			super.updateSelective(info);
+			map.put("code", "sucess");
 		}
 		return map;
 	}
