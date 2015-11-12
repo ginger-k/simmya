@@ -18,7 +18,7 @@ public class DemoController {
 	@Autowired
 	private UserService us;
 	
-	@RequestMapping(value= "/demo额额1", method = RequestMethod.POST)
+	@RequestMapping(value= "/demo1", method = RequestMethod.POST)
 	@ResponseBody
 	public User getUser1(@RequestParam(value = "id", required = true)String id) {
 		return us.selectByPrimaryKey(id);
