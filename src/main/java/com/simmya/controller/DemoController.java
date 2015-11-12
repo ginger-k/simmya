@@ -20,7 +20,7 @@ public class DemoController {
 	@Resource(name = "demoService")
 	private DemoService demoService;
 	
-	@RequestMapping(value= "/demo1", method = RequestMethod.POST)
+	@RequestMapping(value= "/demo额额1", method = RequestMethod.POST)
 	@ResponseBody
 	public User getUser1(@RequestParam(value = "id", required = true)String id) {
 		return demoService.getUsers(id);
