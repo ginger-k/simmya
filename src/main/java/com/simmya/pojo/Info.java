@@ -1,6 +1,11 @@
 package com.simmya.pojo;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 public class Info {
+	@Id
+	@GeneratedValue(generator = "UUID")
     private String id;
 
     private String name;
@@ -14,8 +19,6 @@ public class Info {
     private Integer shareCount;
 
     private Integer agreeCount;
-
-    private String discussId;
 
     private String imageAddress;
 
@@ -79,14 +82,6 @@ public class Info {
 
     public void setAgreeCount(Integer agreeCount) {
         this.agreeCount = agreeCount;
-    }
-
-    public String getDiscussId() {
-        return discussId;
-    }
-
-    public void setDiscussId(String discussId) {
-        this.discussId = discussId == null ? null : discussId.trim();
     }
 
     public String getImageAddress() {

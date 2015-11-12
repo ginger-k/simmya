@@ -1,17 +1,12 @@
 package com.simmya.mapper;
 
+import org.springframework.stereotype.Repository;
+
 import com.simmya.pojo.Address;
 
-public interface AddressMapper {
-    int deleteByPrimaryKey(String id);
+import tk.mybatis.mapper.common.Mapper;
 
-    int insert(Address record);
+@Repository
+public interface AddressMapper extends Mapper<Address> {
 
-    int insertSelective(Address record);
-
-    Address selectByPrimaryKey(String id);
-
-    int updateByPrimaryKeySelective(Address record);
-
-    int updateByPrimaryKey(Address record);
 }

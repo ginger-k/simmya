@@ -1,17 +1,12 @@
 package com.simmya.mapper;
 
+import org.springframework.stereotype.Repository;
+
 import com.simmya.pojo.Servers;
 
-public interface ServersMapper {
-    int deleteByPrimaryKey(String id);
+import tk.mybatis.mapper.common.Mapper;
 
-    int insert(Servers record);
-
-    int insertSelective(Servers record);
-
-    Servers selectByPrimaryKey(String id);
-
-    int updateByPrimaryKeySelective(Servers record);
-
-    int updateByPrimaryKey(Servers record);
+@Repository
+public interface ServersMapper extends Mapper<Servers> {
+    
 }

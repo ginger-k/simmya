@@ -1,17 +1,12 @@
 package com.simmya.mapper;
 
+import org.springframework.stereotype.Repository;
+
 import com.simmya.pojo.BoxCollection;
 
-public interface BoxCollectionMapper {
-    int deleteByPrimaryKey(String id);
+import tk.mybatis.mapper.common.Mapper;
 
-    int insert(BoxCollection record);
+@Repository
+public interface BoxCollectionMapper extends Mapper<BoxCollection> {
 
-    int insertSelective(BoxCollection record);
-
-    BoxCollection selectByPrimaryKey(String id);
-
-    int updateByPrimaryKeySelective(BoxCollection record);
-
-    int updateByPrimaryKey(BoxCollection record);
 }

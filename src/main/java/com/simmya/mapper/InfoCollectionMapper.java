@@ -1,17 +1,12 @@
 package com.simmya.mapper;
 
+import org.springframework.stereotype.Repository;
+
 import com.simmya.pojo.InfoCollection;
 
-public interface InfoCollectionMapper {
-    int deleteByPrimaryKey(String id);
+import tk.mybatis.mapper.common.Mapper;
 
-    int insert(InfoCollection record);
-
-    int insertSelective(InfoCollection record);
-
-    InfoCollection selectByPrimaryKey(String id);
-
-    int updateByPrimaryKeySelective(InfoCollection record);
-
-    int updateByPrimaryKey(InfoCollection record);
+@Repository
+public interface InfoCollectionMapper extends Mapper<InfoCollection> {
+    
 }

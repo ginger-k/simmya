@@ -1,17 +1,12 @@
 package com.simmya.mapper;
 
+import org.springframework.stereotype.Repository;
+
 import com.simmya.pojo.Carts;
 
-public interface CartsMapper {
-    int deleteByPrimaryKey(String id);
+import tk.mybatis.mapper.common.Mapper;
 
-    int insert(Carts record);
-
-    int insertSelective(Carts record);
-
-    Carts selectByPrimaryKey(String id);
-
-    int updateByPrimaryKeySelective(Carts record);
-
-    int updateByPrimaryKey(Carts record);
+@Repository
+public interface CartsMapper extends Mapper<Carts> {
+    
 }
