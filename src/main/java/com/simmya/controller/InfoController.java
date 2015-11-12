@@ -49,8 +49,23 @@ public class InfoController {
 		if (loginUser == null) {
 			return ReturnMap.FAULT;
 		}
-		infoService.doAgree(loginUser.getId(), infoid);
-		return ReturnMap.SUCCESS;
+		return infoService.doAgree(loginUser.getId(), infoid);
+	}
+	
+	@RequestMapping(value= "/infos/discuss", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> doDiscuss(@RequestHeader(value = "token",required = false)String token,
+										 @RequestParam(value = "infoid", required = true)String infoid,
+										 @RequestParam(value = "content", required = true)String content
+										 ) throws SQLException {
+		if (StringUtils.isBlank(token)) {
+			return ReturnMap.BLANK;
+		}
+		User loginUser = userService.checkLogin(token);
+		if (loginUser == null) {
+			return ReturnMap.FAULT;
+		}
+		return infoService.doDiscuss(loginUser.getId(), infoid, content);
 	}
 
 }
