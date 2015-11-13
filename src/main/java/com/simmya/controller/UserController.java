@@ -37,5 +37,15 @@ public class UserController {
 		return map;
 	}
 	
+	@RequestMapping(value= "/user/register", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> doRegister(@RequestParam(value = "name", required = true)String name,
+										  @RequestParam(value = "code", required = true)String code,
+										  @RequestParam(value = "password", required = true)String password) {
+		
+		
+		return null;
+	}
+	
 	
 }

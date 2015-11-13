@@ -53,36 +53,41 @@ public class InfoService extends BaseService<Info>{
 	}
 
 	/*
+	 * info存在
 	 * 检查该用户有没有给该信息点过赞
 	 * info_agree表添加记录
 	 * info更新agree_count
 	 */
 	@Transactional
 	public Map<String, Object> doAgree(String userId, String infoId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		Info info = super.selectByPrimaryKey(infoId);
+		if (info == null) {
+			map.put("code", "error");
+			return map;
+		}
 		InfoAgree infoAgree = new InfoAgree();
 		infoAgree.setUserId(userId);
 		infoAgree.setInfoId(infoId);
-		Map<String, Object> map = new HashMap<String, Object>();
 		List<InfoAgree> list = infoAgreeMapper.select(infoAgree);
 		if (list != null && list.size() > 0) {
 			//{code:error,desc:"你已点赞"}
 			map.put("code", "error");
 			map.put("desc", "你已点赞");
-		} else {
-			infoAgreeMapper.insert(infoAgree);
-			Info info = super.selectByPrimaryKey(infoId);
-			Integer agreeCount = info.getAgreeCount();
-			info.setAgreeCount(agreeCount + 1);
-			super.updateSelective(info);
-			//{code:sucess,desc:"成功"} 
-			map.put("code", "sucess");
-			map.put("desc", "成功");
-		}
+			return map;
+		} 
+		infoAgreeMapper.insert(infoAgree);
+		info.setAgreeCount(info.getAgreeCount() + 1);
+		super.updateSelective(info);
+		//{code:sucess,desc:"成功"} 
+		map.put("code", "sucess");
+		map.put("desc", "成功");
 		return map;
 	}
 
 	
 	/*
+	 * info存在
 	 * 检查该用户有没有给该信息评论过
 	 * discuss表添加记录
 	 * info更新discuss_count
@@ -90,6 +95,11 @@ public class InfoService extends BaseService<Info>{
 	@Transactional
 	public Map<String, Object> doDiscuss(String userid, String infoid, String content) {
 		Map<String, Object> map = new HashMap<String, Object>();
+		Info info = super.selectByPrimaryKey(infoid);
+		if (info == null) {
+			map.put("code", "error");
+			return map;
+		}
 		Discuss discuss = new Discuss();
 		discuss.setUserId(userid);
 		discuss.setInfoId(infoid);
@@ -97,21 +107,20 @@ public class InfoService extends BaseService<Info>{
 		if (list != null && list.size() > 0) {
 			map.put("code", "error");
 			map.put("desc", "你已评论");
-		} else {
-			discuss.setContent(content);
-			discuss.setCreateTime(new Date());
-			discussMapper.insert(discuss);
-			Info info = super.selectByPrimaryKey(infoid);
-			Integer discussCount = info.getDiscussCount();
-			info.setDiscussCount(discussCount + 1); 
-			super.updateSelective(info);
-			map.put("code", "sucess");
-			map.put("desc", "成功");
+			return map;
 		}
+		discuss.setContent(content);
+		discuss.setCreateTime(new Date());
+		discussMapper.insert(discuss);
+		info.setDiscussCount(info.getDiscussCount() + 1); 
+		super.updateSelective(info);
+		map.put("code", "sucess");
+		map.put("desc", "成功");
 		return map;
 	}
 
 	/*
+	 * info 存在
 	 * 检查该用户有没有收藏过该咨询
 	 * info_collection表添加记录
 	 * info更新collect_count
@@ -119,6 +128,11 @@ public class InfoService extends BaseService<Info>{
 	@Transactional
 	public Map<String, Object> collectInfo(String userid, String infoid) {
 		Map<String, Object> map = new HashMap<String, Object>();
+		Info info = super.selectByPrimaryKey(infoid);
+		if (info == null) {
+			map.put("code", "error");
+			return map;
+		}
 		InfoCollection infoCollection = new InfoCollection();
 		infoCollection.setUserId(userid);
 		infoCollection.setInfoId(infoid);
@@ -126,40 +140,42 @@ public class InfoService extends BaseService<Info>{
 		if (list != null && list.size() > 0) {
 			map.put("code", "error");
 			map.put("desc", "你已收藏");
-		} else {
-			infoCollectionMapper.insert(infoCollection);
-			Info info = super.selectByPrimaryKey(infoid);
-			Integer collectCount = info.getCollectCount();
-			info.setCollectCount(collectCount + 1); 
-			super.updateSelective(info);
-			map.put("code", "sucess");
-			map.put("desc", "成功");
+			return map;
 		}
+		infoCollectionMapper.insert(infoCollection);
+		info.setCollectCount(info.getCollectCount() + 1); 
+		super.updateSelective(info);
+		map.put("code", "sucess");
+		map.put("desc", "成功");
 		return map;
 	}
 
 	
 	/*
+	 * info 存在
 	 * 检查该用户有没有分享该咨询
-	 * info_collection表添加记录
-	 * info更新collect_count
+	 * user_share_ref表添加记录
+	 * info更新share_count
 	 */
 	public Map<String, Object> shareInfo(String userId, String infoId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		Info info = super.selectByPrimaryKey(infoId);
+		if (info == null) {
+			map.put("code", "error");
+			return map;
+		}
 		UserShareRef share = new UserShareRef();
 		share.setUserId(userId);
 		share.setInfoId(infoId);
-		Map<String, Object> map = new HashMap<String, Object>();
 		List<UserShareRef> list = shareMapper.select(share);
 		if (list != null && list.size() > 0) {
 			map.put("code", "error");
-		} else {
-			shareMapper.insert(share);
-			Info info = super.selectByPrimaryKey(infoId);
-			Integer count = info.getShareCount();
-			info.setShareCount(count + 1);
-			super.updateSelective(info);
-			map.put("code", "sucess");
+			return map;
 		}
+		shareMapper.insert(share);
+		info.setShareCount(info.getShareCount() + 1);
+		super.updateSelective(info);
+		map.put("code", "sucess");
 		return map;
 	}
 	
