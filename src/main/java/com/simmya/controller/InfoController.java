@@ -41,7 +41,8 @@ public class InfoController {
 	
 	@RequestMapping(value= "/infos/agree", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> doAgree(@RequestHeader(value = "token",required = false)String token,@RequestParam(value = "infoid", required = true)String infoid) throws SQLException {
+	public Map<String, Object> doAgree(@RequestHeader(value = "token",required = true)String token,
+				@RequestParam(value = "infoid", required = true)String infoid) {
 		if (StringUtils.isBlank(token)) {
 			return ReturnMap.BLANK;
 		}
@@ -54,10 +55,10 @@ public class InfoController {
 	
 	@RequestMapping(value= "/infos/discuss", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> doDiscuss(@RequestHeader(value = "token",required = false)String token,
+	public Map<String, Object> doDiscuss(@RequestHeader(value = "token",required = true)String token,
 										 @RequestParam(value = "infoid", required = true)String infoid,
 										 @RequestParam(value = "content", required = true)String content
-										 ) throws SQLException {
+										 ) {
 		if (StringUtils.isBlank(token)) {
 			return ReturnMap.BLANK;
 		}
@@ -70,7 +71,8 @@ public class InfoController {
 	
 	@RequestMapping(value= "/infos/collect", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> collectInfo(@RequestHeader(value = "token",required = false)String token,@RequestParam(value = "infoid", required = true)String infoid) {
+	public Map<String, Object> collectInfo(@RequestHeader(value = "token",required = true)String token,
+			@RequestParam(value = "infoid", required = true)String infoid) {
 		if (StringUtils.isBlank(token)) {
 			return ReturnMap.BLANK;
 		}
@@ -83,7 +85,8 @@ public class InfoController {
 
 	@RequestMapping(value= "/infos/share", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> shareInfo(@RequestHeader(value = "token",required = false)String token,@RequestParam(value = "infoid", required = true)String infoid) {
+	public Map<String, Object> shareInfo(@RequestHeader(value = "token",required = true)String token,
+			@RequestParam(value = "infoid", required = true)String infoid) {
 		if (StringUtils.isBlank(token)) {
 			return ReturnMap.BLANK;
 		}
