@@ -5,16 +5,22 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
 
+import com.simmya.mapper.CodecMapper;
+import com.simmya.pojo.Codec;
 import com.simmya.pojo.User;
 import com.simmya.service.BaseService;
 import com.simmya.util.DbUtil;
 
 @Service
 public class UserService extends BaseService<User>{
+	
+	@Autowired
+	public CodecMapper codecMapper;
 
 	public User checkLogin(String token) {
 		User where = new User();
@@ -36,7 +42,7 @@ public class UserService extends BaseService<User>{
 		super.updateSelective(user);
 		return token;
 	}
-
+	
 	/*
 	 * 前端处理
 	 */

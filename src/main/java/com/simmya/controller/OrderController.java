@@ -30,6 +30,7 @@ public class OrderController {
 	
 	
 	/*
+	 * 冰棍写，此接口作废
 	 * boxids＝"2143123,1234124,2341242"&
 	 * orderWay="一周一期/半年一期"&
 	 * orderCount=3&
