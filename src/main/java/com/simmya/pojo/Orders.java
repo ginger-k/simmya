@@ -13,12 +13,6 @@ public class Orders {
 
     private String userId;
 
-    private String boxIds;
-
-    private Integer orderCount;
-
-    private String orderWay;
-
     private String status;
 
     private BigDecimal totalPrice;
@@ -41,30 +35,6 @@ public class Orders {
 
     public void setUserId(String userId) {
         this.userId = userId == null ? null : userId.trim();
-    }
-
-    public String getBoxIds() {
-        return boxIds;
-    }
-
-    public void setBoxIds(String boxIds) {
-        this.boxIds = boxIds == null ? null : boxIds.trim();
-    }
-
-    public Integer getOrderCount() {
-        return orderCount;
-    }
-
-    public void setOrderCount(Integer orderCount) {
-        this.orderCount = orderCount;
-    }
-
-    public String getOrderWay() {
-        return orderWay;
-    }
-
-    public void setOrderWay(String orderWay) {
-        this.orderWay = orderWay == null ? null : orderWay.trim();
     }
 
     public String getStatus() {
