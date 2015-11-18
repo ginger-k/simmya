@@ -29,7 +29,9 @@ public class BoxController {
 	private UserService userService;
 	/*
 	 * start=1&limit=10
-	 * {'id':'2354234srte',NAME':'烧麦盒子','TITLE':'烧麦好吃','detail':'手工烧麦',imageAddress':'接口前缀+/image1.pig','shareCount':4,'boxPrice':100,'collectCount':'4'}
+	 * {'id':'2354234srte',NAME':'烧麦盒子','TITLE':'烧麦好吃',
+	 *  'detail':'手工烧麦',imageAddress':'接口前缀+/image1.pig',
+	 *  'shareCount':4,'boxPrice':100,'collectCount':'4','discussCount':10}
 	 */
 	@RequestMapping(value= "/boxs/list", method = RequestMethod.GET)
 	@ResponseBody
@@ -44,7 +46,9 @@ public class BoxController {
 	}
 	
 	/*
-	 * {'id':'2354234srte',NAME':'烧麦盒子','TITLE':'烧麦好吃','detail':'手工烧麦',imageAddress':'接口前缀+/image1.pig','shareCount':4,'boxPrice':100,'collectCount':'4'}
+	 * {'id':'2354234srte',NAME':'烧麦盒子','TITLE':'烧麦好吃',
+	 *  'detail':'手工烧麦',imageAddress':'接口前缀+/image1.pig',
+	 *   'shareCount':4,'boxPrice':100,'collectCount':'4','discussCount':10}
 	 */
 	@RequestMapping(value= "/boxs/id", method = RequestMethod.GET)
 	@ResponseBody

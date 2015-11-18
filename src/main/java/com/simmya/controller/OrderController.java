@@ -55,7 +55,7 @@ public class OrderController {
 		if (loginUser == null) {
 			return Collections.emptyList();
 		}
-		return orderService.listOrders(loginUser.getId(), orderId);
+		return orderService.listOrderBoxes(loginUser.getId(), orderId);
 	}
 
 	/*
@@ -76,5 +76,26 @@ public class OrderController {
 			return map;
 		}
 		return orderService.backOrderAdd(loginUser.getId(), orderId);
+	}
+	
+	/*
+	 * 从我的订单发起对盒子退订
+	 */
+	@RequestMapping(value= "/user/orderbackDel", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> orderbackDel(@RequestHeader(value = "token",required = true)String token,
+			@RequestParam(value = "orderId", required = true)String orderId,
+			@RequestParam(value = "boxId", required = true)String boxId) throws SQLException {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		if (StringUtils.isBlank(token)) {
+			map.put("code", "error");
+			return map;
+		}
+		User loginUser = userService.checkLogin(token);
+		if (loginUser == null) {
+			map.put("code", "error");
+			return map;
+		}
+		return orderService.orderBoxBack(loginUser.getId(), orderId, boxId);
 	}
 }

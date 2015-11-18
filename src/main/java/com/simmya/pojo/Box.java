@@ -23,6 +23,8 @@ public class Box {
     private Integer collectCount;
 
     private Integer shareCount;
+    
+    private Integer discussCount;
 
     public String getId() {
         return id;
@@ -87,4 +89,12 @@ public class Box {
     public void setShareCount(Integer shareCount) {
         this.shareCount = shareCount;
     }
+
+	public Integer getDiscussCount() {
+		return discussCount;
+	}
+
+	public void setDiscussCount(Integer discussCount) {
+		this.discussCount = discussCount;
+	}
 }

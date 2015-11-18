@@ -24,7 +24,7 @@ public class BoxService extends BaseService<Box>{
 	public List<Map<String, Object>> listBox(int start, int size) throws SQLException {
 		String sql = "select ID id,NAME NAME,TITLE TITLE,DETAIL detail,"
 				+ "	IMAGE_ADDRESS imageAddress,SHARE_COUNT shareCount,"
-				+ "	BOX_PRICE boxPrice,COLLECT_COUNT collectCount "
+				+ "	BOX_PRICE boxPrice,COLLECT_COUNT collectCount,DISCUSS_COUNT discussCount "
 				+ "	from box limit ?,?";
 		return DbUtil.getMapList(sql, start, size);
 	}
@@ -32,7 +32,7 @@ public class BoxService extends BaseService<Box>{
 	public List<Map<String, Object>> detail(String boxid) throws SQLException {
 		String sql = "select ID id,NAME NAME,TITLE TITLE,DETAIL detail,"
 				+ "	IMAGE_ADDRESS imageAddress,SHARE_COUNT shareCount,"
-				+ "	BOX_PRICE boxPrice,COLLECT_COUNT collectCount "
+				+ "	BOX_PRICE boxPrice,COLLECT_COUNT collectCount,DISCUSS_COUNT discussCount "
 				+ "	from box where id = ?";
 		return DbUtil.getMapList(sql, boxid);
 	}

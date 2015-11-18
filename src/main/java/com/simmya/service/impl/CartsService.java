@@ -54,7 +54,7 @@ public class CartsService extends BaseService<Carts>{
 	public List<Map<String, Object>> listCarts(String id) throws SQLException {
 		String sql = "SELECT b.id id,b.NAME NAME,b.TITLE TITLE,b.DETAIL detail,"
 				+ " b.IMAGE_ADDRESS imageAddress,b.SHARE_COUNT shareCount,"
-				+ " b.BOX_PRICE boxPrice,b.COLLECT_COUNT collectCount "
+				+ " b.BOX_PRICE boxPrice,b.COLLECT_COUNT collectCount,b.DISCUSS_COUNT discussCount "
 				+ " FROM carts c"
 				+ " LEFT JOIN box b ON c.box_ids = b.id"
 				+ " WHERE c.user_id = ?";

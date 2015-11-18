@@ -25,10 +25,12 @@ public class AddressService extends BaseService<Address>{
 	}
 
 	/*
-	 * [{'id':'1234asdfgts','address':'浙江嘉兴'}]
+	 * [{'id':'1234asdfgts','getName':姓名'address':'浙江嘉兴','zipCode':'314004','phone':'18818881888'}]
 	 */
 	public List<Map<String, Object>> listAddresss(String userid) throws SQLException {
-		String sql = "SELECT ID id,ADDRESS_INFO address FROM address WHERE user_id = ?";
+		String sql = "SELECT ID id,ADDRESS_INFO address,GET_NAME getName,ZIPCODE zipCode,PHONE phone "
+				+ " FROM address "
+				+ " WHERE user_id = ?";
 		return DbUtil.getMapList(sql, userid);
 	}
 
